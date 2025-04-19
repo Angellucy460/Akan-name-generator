@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akan Name Generator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="body">
+    <div class="container">
+    <header class="header">
+        <h1>Akan Name Generator</h1>
+        <p>Discover Your Akan name based on your birthdate and gender!</p>
+    </header>
+   <main>
+      <form id="akanForm">
+        <label for="birthdate">Enter Your Date Of Birth:</label><br>
+        <input type="date" id="birthdate" name="birthdate" required><br>
+
+        <label for="gender">Select Your Gender:</label><br>
+        <select name="gender" id="gender" required>
+            <option value="">--Select Gender--</option>
+            <option value="Male">Male</option>
+            <OPtion value="Female">Female</OPtion>
+        </select><br>
+
+        <button type="Submit">Submit</button>
+      </form>
+      <section class="output-section" id="akanNameSection" style="display: none;">
+      <h2>Your Akan Name is:</h2>
+      <p id="akanName"></p>
+      </section>
+   </main>
+   <footer class="footer">
+     <p>&copy; 2025 Akan Name Generator</p>
+   </footer>
+   <script>
+    function getAkanName(dateOfBirth, gender) {
+    const akanNames = {
+        Sunday: { male: "Kwasi", female: "Akosua" },
+        Monday: { male: "Kwadwo", female: "Adwoa" },
+        Tuesday: { male: "Kwabena", female: "Abenaa" },
+        Wednesday: { male: "Kwaku", female: "Akua" },
+        Thursday: { male: "Yaw", female: "Yaa" },
+        Friday: { male: "Kofi", female: "Afua" },
+        Saturday: { male: "Kwame", female: "Ama" },
+    };
+
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayIndex = new Date(dateOfBirth).getDay();
+    const dayOfWeek = daysOfWeek[dayIndex];
+
+    return akanNames[dayOfWeek]?.[gender.toLowerCase()] || "Unknown";
+}
+
+document.getElementById("akanForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const birthdate = document.getElementById("birthdate").value;
+    const gender = document.getElementById("gender").value.toLowerCase();
+
+    if (birthdate && gender) {
+        const akanName = getAkanName(birthdate, gender);
+        document.getElementById("akanName").textContent = akanName;
+        document.getElementById("akanNameSection").style.display = "block"; 
+    }
+}); 
+   </script>
+   </div>
+    </body>
+</html>
